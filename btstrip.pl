@@ -4,28 +4,31 @@ use warnings;
 use strict;
 use Bencode qw( bencode bdecode );
 use Getopt::Std;
+use File::Basename;
 
 $main::VERSION = "1.0";
 $Getopt::Std::STANDARD_HELP_VERSION = 1;
 
+my $prog = basename($0);
+
 sub main::VERSION_MESSAGE {
     my $out = shift;
-    print $out "$0 $main::VERSION\n";
+    print $out "$prog $main::VERSION\n";
 }
 
 sub main::HELP_MESSAGE {
     my $out = shift;
     print $out <<EOF;
-Usage: $0 [OPTION]... [FILE]
+Usage: $prog [OPTION]... [FILE]
   -i        Operate on file in-place
   -t URL    Use given URL for "announce" (default "http://127.0.0.1/")
 
-$0 strips extra fields from a .torrent file, including all
+$prog strips extra fields from a .torrent file, including all
 tracker information. If no file is given, the .torrent is read from
 stdin. If not operating on a file in-place, the edited torrent is sent
 to stdout. Example,
 
-  $0 < file.torrent > edited.torrent
+  $prog < file.torrent > edited.torrent
 EOF
 }
 
